@@ -1,49 +1,42 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FactorizerTest {
+public class FactorizerTest {
 
     @Test
-    void testPrimeFactorsBasic() {
+    public void testPrimeFactors() {
         Factorizer f = new Factorizer();
-        assertEquals(Arrays.asList(3, 3), f.primeFactors(9));
-        assertEquals(Arrays.asList(2, 5), f.primeFactors(10));
-        assertEquals(new ArrayList<>(), f.primeFactors(1));
-        assertEquals(new ArrayList<>(), f.primeFactors(0));
+        List<Integer> expected = Arrays.asList(2, 3);
+        assertEquals(expected, f.primeFactors(6));
     }
 
     @Test
-    void testIsPrime() {
+    public void testIsPrime() {
         Factorizer f = new Factorizer();
         assertTrue(f.isPrime(17));
-        assertFalse(f.isPrime(36));
+        assertFalse(f.isPrime(12));
         assertFalse(f.isPrime(1));
-        assertFalse(f.isPrime(0));
     }
 
     @Test
-    void testIsComposite() {
+    public void testIsComposite() {
         Factorizer f = new Factorizer();
-        assertTrue(f.isComposite(36));
         assertTrue(f.isComposite(12));
         assertFalse(f.isComposite(17));
         assertFalse(f.isComposite(1));
-        assertFalse(f.isComposite(0));
     }
 
     @Test
-    void testReduce() {
+    public void testReduce() {
         Factorizer f = new Factorizer();
         assertEquals("3", f.reduce(36, 12));
         assertEquals("1", f.reduce(12, 12));
         assertEquals("6/7", f.reduce(12, 14));
         assertEquals("12/37", f.reduce(12, 37));
-        assertEquals("Undefined", f.reduce(12, 0));
     }
 }

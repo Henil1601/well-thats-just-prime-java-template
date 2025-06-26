@@ -6,6 +6,7 @@ public class Factorizer {
 
     public ArrayList<Integer> primeFactors(int number) {
         ArrayList<Integer> factors = new ArrayList<>();
+
         if (number <= 1) return factors;
 
         for (int i = 2; i <= number; i++) {
@@ -14,7 +15,6 @@ public class Factorizer {
                 number /= i;
             }
         }
-
         return factors;
     }
 
@@ -28,11 +28,10 @@ public class Factorizer {
     }
 
     public String reduce(int numerator, int denominator) {
-        if (denominator == 0) return "Undefined";
-
         ArrayList<Integer> numFactors = primeFactors(numerator);
         ArrayList<Integer> denFactors = primeFactors(denominator);
 
+        // Remove common factors
         for (int i = 0; i < numFactors.size(); i++) {
             int factor = numFactors.get(i);
             if (denFactors.contains(factor)) {
@@ -42,13 +41,21 @@ public class Factorizer {
             }
         }
 
-        int numProduct = 1;
-        for (int f : numFactors) numProduct *= f;
+        // Multiply remaining factors
+        int reducedNum = 1;
+        for (int factor : numFactors) {
+            reducedNum *= factor;
+        }
 
-        int denProduct = 1;
-        for (int f : denFactors) denProduct *= f;
+        int reducedDen = 1;
+        for (int factor : denFactors) {
+            reducedDen *= factor;
+        }
 
-        if (denProduct == 1) return String.valueOf(numProduct);
-        return numProduct + "/" + denProduct;
+        if (reducedDen == 1) {
+            return String.valueOf(reducedNum);
+        } else {
+            return reducedNum + "/" + reducedDen;
+        }
     }
 }
